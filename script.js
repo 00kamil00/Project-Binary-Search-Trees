@@ -27,4 +27,18 @@ class Tree {
         }
         return sortedArrayToBST(0, sortedArray.length - 1)
     }
+
+    includes(value) {
+        let current = this.root
+        while(current !== null) {
+            if (value === current.value) {
+                return true
+            } else if (value < current.value) {
+                current = current.left
+            } else {
+                current = current.right
+            }
+        }
+        return false
+    }
 }
