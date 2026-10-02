@@ -41,4 +41,33 @@ class Tree {
         }
         return false
     }
+
+    insert(value) {
+        const newNode = new Node(value)
+        let current = this.root
+
+        while (true) {
+            if (current === null) {
+                this.root = newNode
+                return
+            }
+            if (value < current.value) {
+                if (current.left === null) {
+                    current.left = newNode
+                    return
+                } else {
+                    current = current.left
+                }
+            } else if (value > current.value) {
+                if (current.right === null) {
+                    current.right = newNode
+                    return
+                } else {
+                    current = current.right
+                }
+            } else {
+                return
+            }
+        }
+    }
 }
