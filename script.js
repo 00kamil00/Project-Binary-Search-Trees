@@ -70,4 +70,31 @@ class Tree {
             }
         }
     }
+
+    deleteItem(value) {
+        function deleteNode(node, value) {
+            if (node === null) {
+                return null
+            } else if (value < node.value) {
+                node.left = deleteNode(node.left, value)
+            } else if (value > node.value) {
+                node.right = deleteNode(node.right, value)
+            } else {
+                if (node.left === null) {
+                    return node.right
+                } else if (node.right === null) {
+                    return node.left
+                } else {
+                    let successor = node.right
+                    while (successor.left !== null) {
+                        successor = successor.left
+                    }
+                    node.value = successor.value
+                    node.right = deleteNode(node.right, node.value)
+                }
+            }
+            return node
+        }
+        this.root = deleteNode(this.root, value)
+    }
 }
