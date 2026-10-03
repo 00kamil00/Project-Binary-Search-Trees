@@ -97,4 +97,23 @@ class Tree {
         }
         this.root = deleteNode(this.root, value)
     }
+
+    levelOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback is required")
+        }
+        const queue = []
+        if (!this.root) return
+        queue.push(this.root)
+        while (queue.length > 0) {
+            const current = queue.shift()
+            callback(current.value)
+            if (current.left) {
+                queue.push(current.left)
+            }
+            if (current.right) {
+                queue.push(current.right)
+            }
+        }
+    }
 }
