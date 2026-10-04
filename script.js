@@ -116,4 +116,43 @@ class Tree {
             }
         }
     }
+
+    inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback is required")
+        }
+        function traverse(node) {
+            if (node === null) return
+            traverse(node.left)
+            callback(node.value)
+            traverse(node.right)
+        }
+        traverse(this.root)
+    }
+
+    preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback is required")
+        }
+        function traverse(node) {
+            if (node === null) return
+            callback(node.value)
+            traverse(node.left)
+            traverse(node.right)
+        }
+        traverse(this.root)
+    }
+
+    postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Callback is required")
+        }
+        function traverse(node) {
+            if (node === null) return
+            traverse(node.left)
+            traverse(node.right)
+            callback(node.value)
+        }
+        traverse(this.root)
+    }
 }
