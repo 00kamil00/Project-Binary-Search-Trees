@@ -165,7 +165,6 @@ class Tree {
             return result
         }
         let current = this.root
-        if (current === null) return undefined
         while (current !== null) {
             if (value < current.value) {
                 current = current.left
@@ -173,6 +172,23 @@ class Tree {
                 current = current.right
             } else if (value === current.value) {
                 return nodeHeight(current)
+            }
+        }
+        return undefined
+    }
+
+    depth(value) {
+        let current = this.root
+        let depthCount = 0
+        while (current !== null) {
+            if (value < current.value) {
+                current = current.left
+                depthCount++
+            } else if (value > current.value) {
+                current = current.right
+                depthCount++
+            } else if (value === current.value) {
+                return depthCount
             }
         }
         return undefined
