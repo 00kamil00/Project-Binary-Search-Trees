@@ -209,4 +209,12 @@ class Tree {
         }
         return checkNode(this.root)
     }
+
+    rebalance() {
+        const sortedValues = []
+        this.inOrderForEach((item) => {
+            sortedValues.push(item)
+        })
+        this.root = this.buildTree(sortedValues)
+    }
 }
