@@ -193,4 +193,20 @@ class Tree {
         }
         return undefined
     }
+
+    isBalanced() {
+        const checkNode = (node) => {
+            if (node === null) return true
+
+            const leftHeight = this.nodeHeight(node.left)
+            const rightHeight = this.nodeHeight(node.right)
+            const result = Math.abs(leftHeight - rightHeight)
+            if (result > 1) {
+                return false 
+            } else {
+                return checkNode(node.left) && checkNode(node.right)
+            }
+        }
+        return checkNode(this.root)
+    }
 }
