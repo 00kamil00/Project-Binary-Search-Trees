@@ -157,13 +157,6 @@ class Tree {
     }
 
     height(value) {
-        function nodeHeight(node) {
-            if (node === null) return -1
-            const leftHeight = nodeHeight(node.left)
-            const rightHeight = nodeHeight(node.right)
-            const result = Math.max(leftHeight, rightHeight) + 1
-            return result
-        }
         let current = this.root
         while (current !== null) {
             if (value < current.value) {
@@ -175,6 +168,14 @@ class Tree {
             }
         }
         return undefined
+    }
+
+    nodeHeight(node) {
+        if (node === null) return -1
+        const leftHeight = this.nodeHeight(node.left)
+        const rightHeight = this.nodeHeight(node.right)
+        const result = Math.max(leftHeight, rightHeight) + 1
+        return result
     }
 
     depth(value) {
@@ -218,3 +219,33 @@ class Tree {
         this.root = this.buildTree(sortedValues)
     }
 }
+
+
+const randomArray = Array.from({ length: 20 }, () => Math.floor(Math.random() * 100))
+const tree = new Tree(randomArray)
+console.log(tree.isBalanced())
+const elements = []
+tree.levelOrderForEach(val => elements.push(val))
+tree.preOrderForEach(val => elements.push(val))
+tree.postOrderForEach(val => elements.push(val))
+tree.inOrderForEach(val => elements.push(val))
+console.log(elements)
+tree.insert(105)
+tree.insert(110)
+tree.insert(115)
+tree.insert(120)
+console.log(tree.isBalanced())
+tree.rebalance()
+console.log(tree.isBalanced())
+const level = []
+const pre = []
+const post = []
+const inOrd = []
+tree.levelOrderForEach(val => level.push(val))
+tree.preOrderForEach(val => pre.push(val))
+tree.postOrderForEach(val => post.push(val))
+tree.inOrderForEach(val => inOrd.push(val))
+console.log("Level order:", level)
+console.log("Pre order:", pre)
+console.log("Post order:", post)
+console.log("In order:", inOrd)
